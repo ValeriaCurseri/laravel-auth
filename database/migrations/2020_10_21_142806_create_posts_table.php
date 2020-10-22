@@ -17,7 +17,7 @@ class CreatePostsTable extends Migration
             $table->id();
             $table->foreignId('user_id')->constrained()->onDelete('cascade')->onUpdate('cascade');
             $table->string('titolo')->unique();
-            $table->longText('articolo','1000')->unique();
+            $table->longText('articolo','1000');
             $table->timestamps();
         });
     }

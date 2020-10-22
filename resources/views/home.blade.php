@@ -2,7 +2,8 @@
 
 @section('content')
 <div class="container">
-    <div class="card-columns">
+    homeguest
+    {{-- <div class="card-columns">
         {{-- <div class="card">
             <img src="..." class="card-img-top" alt="...">
             <div class="card-body">
@@ -58,7 +59,7 @@
             </footer>
             </blockquote>
         </div> --}}
-        @foreach($posts as $post)
+        {{-- @foreach($posts as $post)
         <div class="card">
             <div class="card-body">
             <h5 class="card-title">{{ $post->titolo }}</h5>
@@ -67,7 +68,7 @@
             </div>
         </div>
         @endforeach
-    </div>
+    </div> --}}
     {{-- <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">

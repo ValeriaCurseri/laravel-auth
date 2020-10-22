@@ -11,7 +11,7 @@ class PostController extends Controller
 {
     public function index(){
         $posts = Post::all()->orderBy('created_at','desc')->get();
-        return view('/', compact('posts'));
+        return view('/');
     }
 
 }

@@ -2,16 +2,18 @@
 
 namespace App\Http\Controllers\Admin;
 
+use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Post;
 use App\User;
+use Illuminate\Support\Str;
 
 class PostController extends Controller
 {
     public function index(){
         $posts = Post::where('user_id',Auth::id())->orderBy('created_at','desc')->get();
-        return view('admin.posts.index', compact('posts'));
+        return view('admin.home', compact('posts'));
     }
     
     public function create(){
@@ -23,11 +25,14 @@ class PostController extends Controller
         $data = $request->all();
 
         $request->validate([
-            'user_id' => 'required',
+            // 'user_id' => 'required',
             'titolo' => 'required|unique:posts',
-            'articolo' => 'required|unique:posts'
+            'articolo' => 'required|unique:posts',
+            // 'slug'=> 'required|unique:posts'
         ]);
-
+        
+        $data['user_id'] = Auth::id();
+        $data['slug'] = Str::slug($data['titolo'], '-');
         $newPost = new Post;
         $newPost->fill($data);
         $salvato = $newPost->save();
@@ -35,5 +40,13 @@ class PostController extends Controller
         if($salvato){
             return redirect()->route('admin.posts.index')->with('status', 'Articolo inserito correttamente');
         };
+    }
+
+    public function show(Post $post){
+        $users = User::all();
+        $id = $post['id'];
+        $user = $users->find($id);
+        $nomeUtente = $user['name'];
+        return view('admin.posts.show', compact('post', 'nomeUtente'));
     }
 }

@@ -23,7 +23,7 @@
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
-                <a class="navbar-brand" href="{{ (Auth::check()) ? route('admin.home') : route('guest.home') }}">
+                <a class="navbar-brand" href="{{ url('/') }}">
                     {{ config('app.name') }}
                     {{-- {{ config('app.name', 'Blog con autenticazione') }} --}}
                 </a>

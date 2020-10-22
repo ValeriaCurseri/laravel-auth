@@ -18,7 +18,7 @@
     @csrf
     @method('POST')
 
-    <div class="form-row">
+    {{-- <div class="form-row">
         <div class="form-group col-md-2">
             <label for="user_id">ID Autore</label>
             <select id="user_id" name="user_id" class="form-control">
@@ -27,14 +27,14 @@
                 <option>{{ $user->id }}</option>
                 @endforeach
             </select>
-        </div>
+        </div> --}}
 
-        <div class="form-group col-md-10">
+        <div class="form-group">
             <label for="titolo">Titolo articolo</label>
             <input type="text" class="form-control" name="titolo" id="titolo" placeholder="Titolo">
         </div>
 
-    </div>
+    {{-- </div> --}}
 
     <div class="form-group">
         <label for="articolo">Articolo</label>
