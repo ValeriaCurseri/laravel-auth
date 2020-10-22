@@ -19,7 +19,7 @@
             </tr>
         </thead>
         <tbody>
-            {{-- @foreach($posts as $post)
+            @foreach($posts as $post)
             <tr>
                 <th scope="row">{{ $post->id }}</th>
                 <td>{{ $post->user_id }}</td>
@@ -28,7 +28,7 @@
                     <a href="{{ route('posts.show', $post->id) }}" class="btn btn-dark mb-5">Mostra dettagli articolo</a>
                 </td>
             </tr>
-            @endforeach --}}
+            @endforeach
         </tbody>
     </table>
 </div>
