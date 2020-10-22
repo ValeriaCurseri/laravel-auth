@@ -18,6 +18,7 @@
                 <th scope="col">ID Autore</th>
                 <th scope="col">Titolo</th>
                 <th scope="col"></th>
+                <th scope="col"></th>
             </tr>
         </thead>
         <tbody>
@@ -28,6 +29,13 @@
                 <td>{{ $post->titolo }}</td>
                 <td>
                     <a href="{{ route('admin.posts.show', $post->id) }}" class="btn btn-dark mb-5">Mostra dettagli articolo</a>
+                </td>
+                <td>
+                    <form action="{{ route('admin.posts.destroy', $post->id) }}" method="post">
+                        @csrf
+                        @method('DELETE')
+                        <input class="btn btn-dark mb-5" type="submit" value="Cancella articolo">
+                    </form>
                 </td>
             </tr>
             @endforeach
