@@ -32,13 +32,13 @@
             <textarea class="form-control" name="articolo" id="articolo" placeholder="Scrivi qui il tuo articolo">{{ (empty($post->id)) ? old('articolo') : $post->articolo }}</textarea>
         </div>
 
-        @foreach ($tags as $tag)
-        <div class="form-group form-check d-inline mr-2">
-                <input type="checkbox" class="form-check-input" name="tags[]" > 
+        <div class="form-group form-check">
+            @foreach ($tags as $tag)
+                <label for="tag" class="form-check-label">{{ $tag->tag }}</label>
+                <input type="checkbox" name="tags[]" class="form-check-input" value="{{ $tag->id }}" @if (!empty($post->id)) {{($post->tags()->contains($tag->id)) ? 'checked' : '' }} @endif> 
                 {{-- {{ (!empty($post->id) && ) ? '' : '' }} --}}
-                <label class="form-check-label" for="tag">{{ $tag->tag }}</label>
-            </div>
             @endforeach
+        </div>
 
         @if (empty($post->id))
             <button type="submit" class="btn btn-primary d-block mt-5">Inserisci nuovo articolo</button>

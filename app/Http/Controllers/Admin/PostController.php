@@ -36,8 +36,10 @@ class PostController extends Controller
         $data['slug'] = Str::slug($data['titolo'], '-');
         $newPost = new Post;
         $newPost->fill($data);
-        dd($newPost->tags);
         $salvato = $newPost->save();
+        // dd($data['tags']); // vedo i dati
+        $newPost->tags()->attach($data['tags']); // inserisco i dati
+        $newPost->tags()->sync($data['tags']);
         if($salvato){
             return redirect()->route('admin.posts.index')->with('status', 'Articolo inserito correttamente');
         };

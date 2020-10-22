@@ -10,7 +10,7 @@ class Post extends Model
         'user_id', 'titolo', 'articolo', 'slug'
     ];
 
-    public function posts(){
-        return $this->belongsToMany('App\Post');
+    public function tags(){
+        return $this->belongsToMany('App\Tag');
     }
 }
