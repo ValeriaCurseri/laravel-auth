@@ -16,9 +16,8 @@ class PostController extends Controller
         return view('admin.home', compact('posts'));
     }
     
-    public function create(){
-        $users = User::all();
-        return view('admin.posts.create', compact('users'));
+    public function create(Post $post){
+        return view('admin.posts.create',$post);
     }
 
     public function store(Request $request){
@@ -53,5 +52,24 @@ class PostController extends Controller
     public function destroy(Post $post){
         $post->delete();
         return redirect()->route('admin.posts.index')->with('status','Articolo cancellato correttamente');
+    }
+
+    public function edit(Post $post){
+        return view('admin.posts.create', compact('post'));
+    }
+
+    public function update(Request $request, Post $post){
+        $data = $request->all();
+
+        $request->validate([
+            'titolo' => 'required|unique:posts',
+            'articolo' => 'required|unique:posts',
+        ]);
+
+        $data['slug'] = Str::slug($data['titolo'], '-');
+        
+        $post->update($data);
+
+        return redirect()->route('admin.posts.index')->with('status','Articolo modificato correttamente');
     }
 }

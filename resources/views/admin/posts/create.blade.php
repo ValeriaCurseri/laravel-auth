@@ -14,34 +14,30 @@
     </div>
     @endif
 
-    <form action="{{route('admin.posts.store')}}" method="post">
-    @csrf
-    @method('POST')
-
-    {{-- <div class="form-row">
-        <div class="form-group col-md-2">
-            <label for="user_id">ID Autore</label>
-            <select id="user_id" name="user_id" class="form-control">
-                <option> </option>
-                @foreach($users as $user)
-                <option>{{ $user->id }}</option>
-                @endforeach
-            </select>
-        </div> --}}
+    <form action="{{ (empty($post->id)) ? route('admin.posts.store') : route('admin.posts.update', $post) }}" method="post">
+        @csrf
+        @if (empty($post->id))
+            @method('POST')
+        @else
+            @method('PATCH')
+        @endif
 
         <div class="form-group">
             <label for="titolo">Titolo articolo</label>
-            <input type="text" class="form-control" name="titolo" id="titolo" placeholder="Titolo">
+            <input type="text" class="form-control" name="titolo" id="titolo" placeholder="Titolo" value="{{ (empty($post->id)) ? old('titolo') : $post->titolo }}">
         </div>
 
-    {{-- </div> --}}
+        <div class="form-group">
+            <label for="articolo">Articolo</label>articolo
+            <textarea class="form-control" name="articolo" id="articolo" placeholder="Scrivi qui il tuo articolo">{{ (empty($post->id)) ? old('articolo') : $post->articolo }}</textarea>
+        </div>
 
-    <div class="form-group">
-        <label for="articolo">Articolo</label>
-        <textarea class="form-control" name="articolo" id="articolo" placeholder="Scrivi qui il tuo articolo"></textarea>
-    </div>
-
-    <button type="submit" class="btn btn-primary">Inserisci nuovo articolo</button>
+        @if (empty($post->id))
+            <button type="submit" class="btn btn-primary">Inserisci nuovo articolo</button>
+        @else
+            <button type="submit" class="btn btn-primary">Modifica articolo</button>
+        @endif
+        
 
     </form>
 </div>

@@ -19,6 +19,7 @@
                 <th scope="col">Titolo</th>
                 <th scope="col"></th>
                 <th scope="col"></th>
+                <th scope="col"></th>
             </tr>
         </thead>
         <tbody>
@@ -29,6 +30,9 @@
                 <td>{{ $post->titolo }}</td>
                 <td>
                     <a href="{{ route('admin.posts.show', $post->id) }}" class="btn btn-dark mb-5">Mostra dettagli articolo</a>
+                </td>
+                <td>
+                    <a href="{{ route('admin.posts.edit', $post->id) }}" class="btn btn-dark mb-5">Modifica l'articolo</a>
                 </td>
                 <td>
                     <form action="{{ route('admin.posts.destroy', $post->id) }}" method="post">
