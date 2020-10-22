@@ -23,9 +23,9 @@
             <label for="user_id">ID Autore</label>
             <select id="user_id" name="user_id" class="form-control">
                 <option> </option>
-                {{-- @foreach($users as $user)
+                @foreach($users as $user)
                 <option>{{ $user->id }}</option>
-                @endforeach --}}
+                @endforeach
             </select>
         </div>
 
