@@ -3,12 +3,14 @@
 @section('content')
 <div class="container">
     <h2 class="mt-5 mb-5">Gestisci gli articoli</h2>
-    <a href="{{ route('posts.create') }}" class="btn btn-dark mb-5">Crea nuovo articolo</a>
-    {{-- @if(session('status'))
+    <a href="{{ route('admin.posts.create') }}" class="btn btn-dark mb-5">Crea nuovo articolo</a>
+    
+    @if(session('status'))
         <div class="alert alert-success">
             {{ session('status') }}
         </div>
-    @endif --}}
+    @endif
+    
     <table class="table">
         <thead>
             <tr>
@@ -25,7 +27,7 @@
                 <td>{{ $post->user_id }}</td>
                 <td>{{ $post->titolo }}</td>
                 <td>
-                    <a href="{{ route('posts.show', $post->id) }}" class="btn btn-dark mb-5">Mostra dettagli articolo</a>
+                    <a href="{{ route('admin.posts.show', $post->id) }}" class="btn btn-dark mb-5">Mostra dettagli articolo</a>
                 </td>
             </tr>
             @endforeach

@@ -11,7 +11,7 @@ class PostController extends Controller
 {
     public function index(){
         $posts = Post::all();
-        return view('admin.posts.index', config('posts')); // view sbagliata
+        return view('admin.home', compact('posts')); // view sbagliata
     }
     
     public function create(){
@@ -22,12 +22,18 @@ class PostController extends Controller
     public function store(Request $request){
         $data = $request->all();
 
+        $request->validate([
+            'user_id' => 'required',
+            'titolo' => 'required|unique:posts',
+            'articolo' => 'required|unique:posts'
+        ]);
+
         $newPost = new Post;
         $newPost->fill($data);
         $salvato = $newPost->save();
-        dd($salvato);
-        // if($salvato){
-        //     return redirect()->route('posts.index');
-        // };
+        // dd($salvato);
+        if($salvato){
+            return redirect()->route('admin.posts.index')->with('status', 'Articolo inserito correttamente');
+        };
     }
 }
