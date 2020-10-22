@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Post;
 use App\User;
+use App\Tag;
 use Illuminate\Support\Str;
 
 class PostController extends Controller
@@ -16,8 +17,9 @@ class PostController extends Controller
         return view('admin.home', compact('posts'));
     }
     
-    public function create(Post $post){
-        return view('admin.posts.create',$post);
+    public function create(){
+        $tags = Tag::all();
+        return view('admin.posts.create', compact('tags'));
     }
 
     public function store(Request $request){
@@ -34,8 +36,8 @@ class PostController extends Controller
         $data['slug'] = Str::slug($data['titolo'], '-');
         $newPost = new Post;
         $newPost->fill($data);
+        dd($newPost->tags);
         $salvato = $newPost->save();
-        // dd($salvato);
         if($salvato){
             return redirect()->route('admin.posts.index')->with('status', 'Articolo inserito correttamente');
         };
@@ -55,7 +57,8 @@ class PostController extends Controller
     }
 
     public function edit(Post $post){
-        return view('admin.posts.create', compact('post'));
+        $tags = Tag::all();
+        return view('admin.posts.create', compact('post','tags'));
     }
 
     public function update(Request $request, Post $post){

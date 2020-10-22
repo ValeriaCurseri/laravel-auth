@@ -23,19 +23,27 @@
         @endif
 
         <div class="form-group">
-            <label for="titolo">Titolo articolo</label>
+            <label for="titolo">Titolo</label>
             <input type="text" class="form-control" name="titolo" id="titolo" placeholder="Titolo" value="{{ (empty($post->id)) ? old('titolo') : $post->titolo }}">
         </div>
 
         <div class="form-group">
-            <label for="articolo">Articolo</label>articolo
+            <label for="articolo">Articolo</label>
             <textarea class="form-control" name="articolo" id="articolo" placeholder="Scrivi qui il tuo articolo">{{ (empty($post->id)) ? old('articolo') : $post->articolo }}</textarea>
         </div>
 
+        @foreach ($tags as $tag)
+        <div class="form-group form-check d-inline mr-2">
+                <input type="checkbox" class="form-check-input" name="tags[]" > 
+                {{-- {{ (!empty($post->id) && ) ? '' : '' }} --}}
+                <label class="form-check-label" for="tag">{{ $tag->tag }}</label>
+            </div>
+            @endforeach
+
         @if (empty($post->id))
-            <button type="submit" class="btn btn-primary">Inserisci nuovo articolo</button>
+            <button type="submit" class="btn btn-primary d-block mt-5">Inserisci nuovo articolo</button>
         @else
-            <button type="submit" class="btn btn-primary">Modifica articolo</button>
+            <button type="submit" class="btn btn-primary d-block mt-5">Modifica articolo</button>
         @endif
         
 
