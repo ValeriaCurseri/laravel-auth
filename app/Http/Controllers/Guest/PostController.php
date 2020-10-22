@@ -10,8 +10,8 @@ use App\User;
 class PostController extends Controller
 {
     public function index(){
-        $posts = Post::all();
-        return view('guest.home', compact('posts'));
+        $posts = Post::all()->orderBy('created_at','desc')->get();
+        return view('/', compact('posts'));
     }
 
 }

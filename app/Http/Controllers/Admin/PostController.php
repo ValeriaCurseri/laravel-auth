@@ -10,8 +10,8 @@ use App\User;
 class PostController extends Controller
 {
     public function index(){
-        $posts = Post::all();
-        return view('admin.home', compact('posts')); // view sbagliata
+        $posts = Post::where('user_id',Auth::id())->orderBy('created_at','desc')->get();
+        return view('admin.posts.index', compact('posts'));
     }
     
     public function create(){
