@@ -34,9 +34,10 @@
 
         <div class="form-group form-check">
             @foreach ($tags as $tag)
-                <label for="tag" class="form-check-label">{{ $tag->tag }}</label>
-                <input type="checkbox" name="tags[]" class="form-check-input" value="{{ $tag->id }}" @if (!empty($post->id)) {{($post->tags()->contains($tag->id)) ? 'checked' : '' }} @endif> 
-                {{-- {{ (!empty($post->id) && ) ? '' : '' }} --}}
+            <div class="pr-4 d-inline">
+                <label for="tag" class="form-check-label mr-4">{{ $tag->tag }}</label>
+                <input type="checkbox" name="tags[]" class="form-check-input" value="{{ $tag->id }}" {{(!empty($post->id) && $post->tags->contains($tag->id)) ? 'checked' : '' }}> 
+            </div>
             @endforeach
         </div>
 

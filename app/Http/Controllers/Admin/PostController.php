@@ -44,37 +44,44 @@ class PostController extends Controller
             return redirect()->route('admin.posts.index')->with('status', 'Articolo inserito correttamente');
         };
     }
-
+    
     public function show(Post $post){
         $users = User::all();
-        $id = $post['id'];
+        $id = $post['user_id'];
         $user = $users->find($id);
         $nomeUtente = $user['name'];
-        return view('admin.posts.show', compact('post', 'nomeUtente'));
+        $tags = $post['tags'];
+        return view('admin.posts.show', compact('post', 'nomeUtente','tags'));
     }
-
+    
     public function destroy(Post $post){
         $post->delete();
         return redirect()->route('admin.posts.index')->with('status','Articolo cancellato correttamente');
     }
-
+    
     public function edit(Post $post){
         $tags = Tag::all();
         return view('admin.posts.create', compact('post','tags'));
     }
-
+    
     public function update(Request $request, Post $post){
         $data = $request->all();
-
+        
+        // $request->validate([
+        //     'titolo' => 'required|unique:posts',
+        //     'articolo' => 'required|unique:posts',
+        // ]);
+        
         $request->validate([
-            'titolo' => 'required|unique:posts',
-            'articolo' => 'required|unique:posts',
+            'titolo' => 'required',
+            'articolo' => 'required',
         ]);
-
+        
         $data['slug'] = Str::slug($data['titolo'], '-');
+        $post->tags()->sync($data['tags']);
         
         $post->update($data);
-
+        
         return redirect()->route('admin.posts.index')->with('status','Articolo modificato correttamente');
     }
 }
