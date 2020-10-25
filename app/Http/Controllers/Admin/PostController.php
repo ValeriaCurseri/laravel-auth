@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -66,17 +67,25 @@ class PostController extends Controller
         $data = $request->all();
         
         $request->validate([
-            'titolo' => 'required|unique:posts',
-            'articolo' => 'required|unique:posts',
+            // 'titolo' => 'required|unique:posts',
+            // 'articolo' => 'required|unique:posts',
+            'titolo' => [
+                'required',
+                Rule::unique('posts')->ignore($post), // regola che permette di non controllare rispetto all'unicità anche il titolo che sto modidficando. NECESSARIO INSERIRE use Illuminate\Validation\Rule;
+            ],
+            'articolo' => [
+                'required',
+                Rule::unique('posts')->ignore($post),
+            ]
         ]);
         
-        // $request->validate([
-        //     'titolo' => 'required',
-        //     'articolo' => 'required',
-        // ]);
-        
         $data['slug'] = Str::slug($data['titolo'], '-');
-        $post->tags()->sync($data['tags']);
+
+        if(empty($data['tags'])){                   // SE l'array dei tags è vuoto
+            $post->tags()->detach();   // elimino tutti i tags salvati
+        } else {                                        // ALTRIMENTI se l'array dei tags non è vuoto e ci sono modifiche
+            $post->tags()->sync($data['tags']);     // con sync aggiorno i tags salvati
+        }
         
         $post->update($data);
         
