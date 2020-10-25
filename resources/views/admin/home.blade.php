@@ -45,6 +45,9 @@
             @endforeach
         </tbody>
     </table>
+    <div class="pagination d-flex justify-content-center">
+        {{ $posts->links() }}
+    </div>
 </div>
 @endsection
 {{-- .Xn*2Amv7G2nH!9 --}}
