@@ -26,10 +26,8 @@ class PostController extends Controller
         $data = $request->all();
 
         $request->validate([
-            // 'user_id' => 'required',
             'titolo' => 'required|unique:posts',
             'articolo' => 'required|unique:posts',
-            // 'slug'=> 'required|unique:posts'
         ]);
         
         $data['user_id'] = Auth::id();
@@ -67,15 +65,15 @@ class PostController extends Controller
     public function update(Request $request, Post $post){
         $data = $request->all();
         
-        // $request->validate([
-        //     'titolo' => 'required|unique:posts',
-        //     'articolo' => 'required|unique:posts',
-        // ]);
-        
         $request->validate([
-            'titolo' => 'required',
-            'articolo' => 'required',
+            'titolo' => 'required|unique:posts',
+            'articolo' => 'required|unique:posts',
         ]);
+        
+        // $request->validate([
+        //     'titolo' => 'required',
+        //     'articolo' => 'required',
+        // ]);
         
         $data['slug'] = Str::slug($data['titolo'], '-');
         $post->tags()->sync($data['tags']);
