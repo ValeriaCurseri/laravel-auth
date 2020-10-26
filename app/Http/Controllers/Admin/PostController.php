@@ -95,6 +95,13 @@ class PostController extends Controller
             $post->tags()->sync($data['tags']);         // con sync aggiorno i tags salvati
         }
         
+        if(!empty($data['img'])){                   // SE da form è stata inserita una nuova immagine
+            if(!empty($post['img'])){               // E SE era già stata caricata un'immagine per questo articolo
+                Storage::disk('public')->delete('images',$post['img']); // all'interno della cartella public > storage > images cancello l'immagine memorizzata in precedenza
+            }
+            $data['img'] = Storage::disk('public')->put('images',$data['img']); // all'interno della stessa cartella memorizzo il nuovo file
+        }
+
         $post->update($data);
         
         return redirect()->route('admin.posts.index')->with('status','Articolo modificato correttamente');
