@@ -16,6 +16,7 @@
             <tr>
                 <th scope="col">ID</th>
                 <th scope="col">ID Autore</th>
+                <th scope="col">Copertina</th>
                 <th scope="col">Titolo</th>
                 <th scope="col"></th>
                 <th scope="col"></th>
@@ -27,6 +28,7 @@
             <tr>
                 <th scope="row">{{ $post->id }}</th>
                 <td>{{ $post->user_id }}</td>
+                <td><img src="{{ $post->img }}" class="img-fluid" alt="Responsive image"></td>
                 <td>{{ $post->titolo }}</td>
                 <td>
                     <a href="{{ route('admin.posts.show', $post->id) }}" class="btn btn-dark mb-5">Mostra dettagli articolo</a>

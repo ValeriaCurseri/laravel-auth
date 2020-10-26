@@ -17,8 +17,9 @@ class PostsTableSeeder extends Seeder
             $newPost = new Post();
             $newPost->user_id = $faker->numberBetween(1, 11);
             $newPost->titolo = $faker->text(50);
-            $newPost->articolo = $faker->text(1000) ;
             $newPost->slug = Str::slug($newPost->titolo, '-');
+            $newPost->articolo = $faker->text(1000);
+            $newPost->img = 'https://picsum.photos/640/480?random';
             $newPost->save();
         }
     }
