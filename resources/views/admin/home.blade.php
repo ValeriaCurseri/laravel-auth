@@ -28,7 +28,7 @@
             <tr>
                 <th scope="row">{{ $post->id }}</th>
                 <td>{{ $post->user_id }}</td>
-                <td><img src="{{ $post->img }}" class="img-fluid" alt="Responsive image"></td>
+                <td><img src="{{ asset('storage/' . $post->img) }}" class="img-fluid" alt="Responsive image"></td>
                 <td>{{ $post->titolo }}</td>
                 <td>
                     <a href="{{ route('admin.posts.show', $post->id) }}" class="btn btn-dark mb-5">Mostra dettagli articolo</a>

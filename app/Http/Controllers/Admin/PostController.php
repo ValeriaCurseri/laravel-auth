@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
@@ -31,11 +32,15 @@ class PostController extends Controller
         $request->validate([
             'titolo' => 'required|unique:posts',
             'articolo' => 'required|unique:posts',
+            'img'=> 'image'
         ]);
         
         $data['user_id'] = Auth::id();
         $data['slug'] = Str::slug($data['titolo'], '-');
         $newPost = new Post;
+        if(!empty($data['img'])){
+            $data['img'] = Storage::disk('public')->put('images',$data['img']);
+        }
         $newPost->fill($data);
         $salvato = $newPost->save();
         // dd($data['tags']); // vedo i dati
@@ -78,15 +83,16 @@ class PostController extends Controller
             'articolo' => [
                 'required',
                 Rule::unique('posts')->ignore($post),
-            ]
+            ],
+            'img'=> 'image'
         ]);
         
         $data['slug'] = Str::slug($data['titolo'], '-');
 
         if(empty($data['tags'])){                   // SE l'array dei tags è vuoto
-            $post->tags()->detach();   // elimino tutti i tags salvati
-        } else {                                        // ALTRIMENTI se l'array dei tags non è vuoto e ci sono modifiche
-            $post->tags()->sync($data['tags']);     // con sync aggiorno i tags salvati
+            $post->tags()->detach();                    // elimino tutti i tags salvati
+        } else {                                    // ALTRIMENTI se l'array dei tags non è vuoto e ci sono modifiche
+            $post->tags()->sync($data['tags']);         // con sync aggiorno i tags salvati
         }
         
         $post->update($data);

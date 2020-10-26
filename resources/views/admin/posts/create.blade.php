@@ -14,7 +14,7 @@
     </div>
     @endif
 
-    <form action="{{ (empty($post->id)) ? route('admin.posts.store') : route('admin.posts.update', $post) }}" method="post">
+    <form enctype="multipart/form-data" action="{{ (empty($post->id)) ? route('admin.posts.store') : route('admin.posts.update', $post) }}" method="post">
         @csrf
         @if (empty($post->id))
             @method('POST')
@@ -30,6 +30,11 @@
         <div class="form-group">
             <label for="articolo">Articolo</label>
             <textarea class="form-control" name="articolo" id="articolo" placeholder="Scrivi qui il tuo articolo">{{ (empty($post->id)) ? old('articolo') : $post->articolo }}</textarea>
+        </div>
+
+        <div class="form-group">
+            <label for="img">Copertina dell'articolo</label>
+            <input type="file" class="form-control-file" id="img" name="img" accept="image/*">
         </div>
 
         <div class="form-group form-check">
