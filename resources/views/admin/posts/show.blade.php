@@ -3,7 +3,9 @@
 @section('content')
 <div class="container">
     <h2 class="mt-5 mb-5">{{ $post['titolo'] }}</h2>
-    <img src="{{ asset('storage/' . $post->img) }}" class="img-fluid" alt="Responsive image">
+    @if(!empty($post['img']))
+        <img src="{{ asset('storage/' . $post['img']) }}" class="img-fluid" alt="Responsive image">
+    @endif
     <p>{{ $post['articolo'] }}</p>
     <small class="d-block mb-5">Pubblicato da {{ $nomeUtente }}</small>
     <small class="d-block mb-5 text-muted"><strong>Tag</strong> 
