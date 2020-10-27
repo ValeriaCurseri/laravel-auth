@@ -7,12 +7,18 @@
         <div class="col mb-4">
             <div class="card">
                 @if(!empty($post['img']))
-                    <img src="{{ asset('storage/' . $post['img']) }}" class="img-fluid" alt="{{ $post->titolo }}">
+                    <a href="{{ route('show', $post['id']) }}">
+                        <img src="{{ asset('storage/' . $post['img']) }}" class="img-fluid" alt="{{ $post->titolo }}">
+                    </a>
                 @endif
                 <div class="card-body">
-                    <h5 class="card-title">{{ $post->titolo }}</h5>
+                    <h5 class="card-title">
+                        <a href="{{ route('show', $post['id']) }}">
+                            {{ $post->titolo }}
+                        </a>
+                    </h5>
                     {{-- DA METTERE NELLO SHOW <p class="card-text">{{ $post->articolo }}</p> --}}
-                    <p class="card-text"><small class="text-muted">{{ $post->user->name }} / {{ $post->updated_at }}</small></p>
+                    <p class="card-text"><small class="text-muted">{{ $post->user->name }} / {{ Carbon\Carbon::parse($post->updated_at)->diffForHumans()}}</small></p>
                 </div>
             </div>
         </div>
