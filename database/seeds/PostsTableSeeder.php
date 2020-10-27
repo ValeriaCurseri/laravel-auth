@@ -13,13 +13,14 @@ class PostsTableSeeder extends Seeder
      */
     public function run(Faker $faker)
     {
-        for($i = 0; $i < 20; $i++){
+        for($i = 0; $i < 10; $i++){
             $newPost = new Post();
             $newPost->user_id = $faker->numberBetween(1, 11);
             $newPost->titolo = $faker->text(50);
             $newPost->slug = Str::slug($newPost->titolo, '-');
             $newPost->articolo = $faker->text(1000);
             $newPost->img = 'https://picsum.photos/640/480?random';
+            $newPost->tags = $faker->words($nb = 3, $asText = false);
             $newPost->save();
         }
     }

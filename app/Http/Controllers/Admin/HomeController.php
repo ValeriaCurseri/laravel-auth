@@ -28,8 +28,12 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $posts = Post::where('user_id',Auth::id())->orderBy('id','desc')->get();
-        $posts = DB::table('posts')->paginate(5);
+        dd(Auth::user());
+        if(Auth::user()->role->name == 'editor'){
+            $posts = Post::where('user_id', Auth::id())->orderBy('id','desc')->paginate(5);
+        } else if(Auth::user()->role->name == 'admin'){
+            $posts = Post::paginate(5);
+        }
         return view('admin.home', compact('posts'));
     }
 }
