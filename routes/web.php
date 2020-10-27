@@ -24,11 +24,4 @@ Route::prefix('admin')->name('admin.')->namespace('Admin')->middleware('auth')->
     Route::resource('posts','PostController');
 });
 
-Route::get('/', function () {
-    return view('home');
-});
-
-// Route::prefix('guest')->name('guest.')->namespace('Guest')->group(function () {
-//     Route::get('home', 'HomeController@index')->name('home');
-//     Route::resource('posts','PostController');
-// });
+Route::get('/', 'HomeController@index');

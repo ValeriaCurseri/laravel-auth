@@ -30,7 +30,7 @@
                 <td>{{ $post->user_id }}</td>
                 <td>
                     @if(!empty($post->img))
-                        <img src="{{ asset('storage/' . $post->img) }}" class="img-fluid" alt="Responsive image">
+                        <img src="{{ asset('storage/' . $post->img) }}" class="img-fluid" alt="{{ $post->titolo }}">
                     @endif
                 </td>
                 <td>{{ $post->titolo }}</td>
