@@ -14,14 +14,12 @@ class HomeController extends Controller
         return view('index', compact('posts'));
     }
 
-    public function show(Post $post){
+    public function show($id){
         $users = User::all();
-        // dd($users);
-        dd($post);
+        $post = Post::find($id);
+        // dd($post->tags);
         $id = $post->user_id;
-        // dd($id);
         $user = $users->find($id);
-        // dd($user);
         $nomeUtente = $user->name;
         return view('show', compact('post','nomeUtente'));
     }

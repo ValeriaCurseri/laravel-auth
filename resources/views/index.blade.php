@@ -18,6 +18,11 @@
                         </a>
                     </h5>
                     {{-- DA METTERE NELLO SHOW <p class="card-text">{{ $post->articolo }}</p> --}}
+                    <p class="card-text">
+                        @foreach($post->tags as $tag )
+                        <small>{{ $tag->tag }} </small>
+                        @endforeach
+                    </p>
                     <p class="card-text"><small class="text-muted">{{ $post->user->name }} / {{ Carbon\Carbon::parse($post->updated_at)->diffForHumans()}}</small></p>
                 </div>
             </div>

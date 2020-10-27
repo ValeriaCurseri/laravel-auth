@@ -13,7 +13,9 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
+        // if ($this->app->environment('local', 'testing')) {
+        //     $this->app->register(DuskServiceProvider::class);
+        // }
     }
 
     /**
@@ -23,6 +25,6 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        // Carbon::setLocale($this->app->getLocale());
     }
 }

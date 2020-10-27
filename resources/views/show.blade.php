@@ -9,7 +9,7 @@
     <p>{{ $post['articolo'] }}</p>
     <small class="d-block mb-5">Pubblicato da {{ $nomeUtente }}</small>
     <small class="d-block mb-5 text-muted"><strong>Tag</strong> 
-        @foreach($tags as $tag)
+        @foreach($post->tags as $tag)
         {{ $tag->tag }}
         @endforeach
     </small>
