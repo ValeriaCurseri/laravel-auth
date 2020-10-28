@@ -38,12 +38,6 @@ class PostController extends Controller
         return view('admin.home', compact('posts'));
         // return view('admin.posts.index', compact('posts'));
     }
-
-    // public function index(){
-    //     $posts = Post::where('user_id',Auth::id())->orderBy('id','desc')->get();
-    //     $posts = DB::table('posts')->paginate(5);
-    //     return view('admin.home', compact('posts'));
-    // }
     
     public function create(){
         $tags = Tag::all();

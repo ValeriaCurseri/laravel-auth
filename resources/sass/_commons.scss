@@ -1,12 +1,3 @@
-table{
-    tbody{
-        tr{
-            td{
-                .img-fluid{
-                    max-width: 300px;
-                }
-            }
-        }
-    }
-
+table .img-fluid, .form-group img{
+    max-width: 300px;
 }

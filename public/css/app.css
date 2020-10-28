@@ -1,6 +1,7 @@
 @import url(https://fonts.googleapis.com/css?family=Nunito);@charset "UTF-8";
 
-table tbody tr td .img-fluid {
+table .img-fluid,
+.form-group img {
   max-width: 300px;
 }
 

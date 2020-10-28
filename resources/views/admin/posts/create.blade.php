@@ -34,6 +34,9 @@
 
         <div class="form-group">
             <label for="img">Copertina dell'articolo</label>
+            @if (!empty($post->img))
+                <img class="d-block mb-2 mt-2" src="{{ asset('storage/' . $post->img) }}" alt="{{ $post->slug }}">
+            @endif
             <input type="file" class="form-control-file" id="img" name="img" accept="image/*">
         </div>
 
