@@ -7,10 +7,14 @@ use Illuminate\Database\Eloquent\Model;
 class Role extends Model
 {
     protected $fillable = [
-        'name',
+        'nome',
     ];
 
     public function users(){
         return $this->hasMany('App\User');
     }
+
+    // public function user(){
+    //     return $this->belongsTo('App\User');
+    // }
 }

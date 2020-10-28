@@ -24,5 +24,5 @@ Route::prefix('admin')->name('admin.')->namespace('Admin')->middleware('auth')->
     Route::resource('posts','PostController');
 });
 
-Route::get('/', 'HomeController@index');
+Route::get('/', 'HomeController@index')->name('home');
 Route::get('/show/{id}', 'HomeController@show')->name('show');

@@ -23,7 +23,7 @@
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
-                <a class="navbar-brand" href="{{ url('/') }}">
+                <a class="navbar-brand" href="{{ (Auth::check()) ? route('admin.posts.index') : route('home') }}">
                     {{ config('app.name') }}
                     {{-- {{ config('app.name', 'Blog con autenticazione') }} --}}
                 </a>
@@ -56,7 +56,7 @@
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="{{ route('admin.home') }}">
+                                    <a class="dropdown-item" href="{{ route('admin.posts.index') }}">
                                         {{ __('Lavora sugli articoli') }}
                                     </a>
                                     <a class="dropdown-item" href="{{ route('logout') }}"
