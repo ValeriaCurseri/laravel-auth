@@ -27,16 +27,12 @@ class PostController extends Controller
      */
     public function index()
     {
-        // dd(Auth::user());
-        // dd(Auth::user()->role);
         if(Auth::user()->role->nome == 'editor'){
             $posts = Post::where('user_id', Auth::id())->orderBy('id','desc')->paginate(5);
         } else if(Auth::user()->role->nome == 'admin'){
             $posts = Post::orderBy('id','desc')->paginate(5);
-            // $posts = Post::paginate(5)->sortByDesc('id');
         }
-        return view('admin.home', compact('posts'));
-        // return view('admin.posts.index', compact('posts'));
+        return view('admin.posts.home', compact('posts'));
     }
     
     public function create(){

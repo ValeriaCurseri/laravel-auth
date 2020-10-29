@@ -26,25 +26,25 @@
         <tbody>
             @foreach($posts as $post)
             <tr>
-                <th scope="row">{{ $post->id }}</th>
-                <td>{{ $post->user_id }}</td>
-                <td>
+                <th class="align-middle scope="row">{{ $post->id }}</th>
+                <td class="align-middle>{{ $post->user_id }}</td>
+                <td class="align-middle>
                     @if(!empty($post->img))
                         <img src="{{ asset('storage/' . $post->img) }}" class="img-fluid" alt="{{ $post->titolo }}">
                     @endif
                 </td>
-                <td>{{ $post->titolo }}</td>
-                <td>
-                    <a href="{{ route('admin.posts.show', $post->id) }}" class="btn btn-dark mb-5">Mostra dettagli articolo</a>
+                <td class="align-middle>{{ $post->titolo }}</td>
+                <td class="align-middle>
+                    <a href="{{ route('admin.posts.show', $post->id) }}" class="btn btn-dark">Mostra dettagli articolo</a>
                 </td>
-                <td>
-                    <a href="{{ route('admin.posts.edit', $post->id) }}" class="btn btn-dark mb-5">Modifica l'articolo</a>
+                <td class="align-middle>
+                    <a href="{{ route('admin.posts.edit', $post->id) }}" class="btn btn-dark">Modifica l'articolo</a>
                 </td>
-                <td>
+                <td class="align-middle>
                     <form action="{{ route('admin.posts.destroy', $post->id) }}" method="post">
                         @csrf
                         @method('DELETE')
-                        <input class="btn btn-dark mb-5" type="submit" value="Cancella articolo">
+                        <input class="btn btn-dark" type="submit" value="Cancella articolo">
                     </form>
                 </td>
             </tr>

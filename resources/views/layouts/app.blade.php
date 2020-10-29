@@ -56,8 +56,13 @@
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                    @if(Auth::user()->role->nome == 'admin')
+                                    <a class="dropdown-item" href="{{ route('admin.users.index') }}">
+                                        {{ __('Gestisci gli utenti') }}
+                                    </a>
+                                    @endif
                                     <a class="dropdown-item" href="{{ route('admin.posts.index') }}">
-                                        {{ __('Lavora sugli articoli') }}
+                                        {{ __('Gestisci gli articoli') }}
                                     </a>
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
