@@ -13,6 +13,7 @@ use App\User;
 use App\Tag;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
@@ -48,6 +49,8 @@ class UserController extends Controller
             'password'=> 'required'
         ]);
         
+        $data['password'] = Hash::make($data['password']);
+
         $newUser = new User;
         $newUser->fill($data);
         $salvato = $newUser->save();
@@ -66,25 +69,28 @@ class UserController extends Controller
     }
     
     public function edit(User $user){
-        $roles = Role::all();
-        return view('admin.users.create', compact('user','roles'));
+        // SOLO L'UTENTE STESSO PUO MODIFICARE IL SUO PROFILO - L'ADMIN PUO SOLO CREARE E ELIMINARE UTENTI
+        // $roles = Role::all();
+        // return view('admin.users.create', compact('user','roles'));
     }
     
     public function update(Request $request, User $user){
-        $data = $request->all();
+        // SOLO L'UTENTE STESSO PUO MODIFICARE IL SUO PROFILO - L'ADMIN PUO SOLO CREARE E ELIMINARE UTENTI
+        // $data = $request->all();
         
-        $request->validate([
-            'name' => 'required',
-            'role_id' => 'required',
-            'email'=> [
-                'required',
-                Rule::unique('users')->ignore($user),
-            ],
-            'password'=> 'required'
-        ]);
+        // $request->validate([
+        //     'name' => 'required',
+        //     'role_id' => 'required',
+        //     'email'=> [
+        //         'required',
+        //         Rule::unique('users')->ignore($user),
+        //     ],
+        //     'password'=> 'required'
+        // ]);
+        // $data['password'] = Hash::make($data['password']);
         
-        $user->update($data);
+        // $user->update($data);
         
-        return redirect()->route('admin.users.index')->with('status','Utente modificato correttamente');
+        // return redirect()->route('admin.users.index')->with('status','Utente modificato correttamente');
     }
 }

@@ -26,21 +26,21 @@
         <tbody>
             @foreach($posts as $post)
             <tr>
-                <th class="align-middle scope="row">{{ $post->id }}</th>
-                <td class="align-middle>{{ $post->user_id }}</td>
-                <td class="align-middle>
+                <th class="align-middle" scope="row">{{ $post->id }}</th>
+                <td class="align-middle">{{ $post->user_id }}</td>
+                <td class="align-middle">
                     @if(!empty($post->img))
                         <img src="{{ asset('storage/' . $post->img) }}" class="img-fluid" alt="{{ $post->titolo }}">
                     @endif
                 </td>
-                <td class="align-middle>{{ $post->titolo }}</td>
-                <td class="align-middle>
+                <td class="align-middle">{{ $post->titolo }}</td>
+                <td class="align-middle">
                     <a href="{{ route('admin.posts.show', $post->id) }}" class="btn btn-dark">Mostra dettagli articolo</a>
                 </td>
-                <td class="align-middle>
+                <td class="align-middle">
                     <a href="{{ route('admin.posts.edit', $post->id) }}" class="btn btn-dark">Modifica l'articolo</a>
                 </td>
-                <td class="align-middle>
+                <td class="align-middle">
                     <form action="{{ route('admin.posts.destroy', $post->id) }}" method="post">
                         @csrf
                         @method('DELETE')
