@@ -65,45 +65,26 @@ class UserController extends Controller
         return redirect()->route('admin.users.index')->with('status','Utente cancellato correttamente');
     }
     
-    public function edit(Post $post){
-        // $tags = Tag::all();
-        // return view('admin.posts.create', compact('post','tags'));
+    public function edit(User $user){
+        $roles = Role::all();
+        return view('admin.users.create', compact('user','roles'));
     }
     
-    public function update(Request $request, Post $post){
-        // $data = $request->all();
+    public function update(Request $request, User $user){
+        $data = $request->all();
         
-        // $request->validate([
-        //     // 'titolo' => 'required|unique:posts',
-        //     // 'articolo' => 'required|unique:posts',
-        //     'titolo' => [
-        //         'required',
-        //         Rule::unique('posts')->ignore($post), // regola che permette di non controllare rispetto all'unicità anche il titolo che sto modidficando. NECESSARIO INSERIRE use Illuminate\Validation\Rule;
-        //     ],
-        //     'articolo' => [
-        //         'required',
-        //         Rule::unique('posts')->ignore($post),
-        //     ],
-        //     'img'=> 'image'
-        // ]);
+        $request->validate([
+            'name' => 'required',
+            'role_id' => 'required',
+            'email'=> [
+                'required',
+                Rule::unique('users')->ignore($user),
+            ],
+            'password'=> 'required'
+        ]);
         
-        // $data['slug'] = Str::slug($data['titolo'], '-');
-
-        // if(empty($data['tags'])){                   // SE l'array dei tags è vuoto
-        //     $post->tags()->detach();                    // elimino tutti i tags salvati
-        // } else {                                    // ALTRIMENTI se l'array dei tags non è vuoto e ci sono modifiche
-        //     $post->tags()->sync($data['tags']);         // con sync aggiorno i tags salvati
-        // }
+        $user->update($data);
         
-        // if(!empty($data['img'])){                   // SE da form è stata inserita una nuova immagine
-        //     if(!empty($post['img'])){               // E SE era già stata caricata un'immagine per questo articolo
-        //         Storage::disk('public')->delete('images',$post['img']); // all'interno della cartella public > storage > images cancello l'immagine memorizzata in precedenza
-        //     }
-        //     $data['img'] = Storage::disk('public')->put('images',$data['img']); // all'interno della stessa cartella memorizzo il nuovo file
-        // }
-
-        // $post->update($data);
-        
-        // return redirect()->route('admin.posts.index')->with('status','Articolo modificato correttamente');
+        return redirect()->route('admin.users.index')->with('status','Utente modificato correttamente');
     }
 }
