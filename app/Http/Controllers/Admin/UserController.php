@@ -48,31 +48,21 @@ class UserController extends Controller
             'password'=> 'required'
         ]);
         
-        // $data['user_id'] = Auth::id();
-        // $data['slug'] = Str::slug($data['titolo'], '-');
         $newUser = new User;
         $newUser->fill($data);
         $salvato = $newUser->save();
-        // dd($data['tags']); // vedo i dati
-        // $newUser->tags()->attach($data['tags']); // inserisco i dati
-        // $newUser->tags()->sync($data['tags']);
         if($salvato){
             return redirect()->route('admin.users.index')->with('status', 'Utente inserito correttamente');
         };
     }
     
-    public function show(Post $post){
-        // $users = User::all();
-        // $id = $post['user_id'];
-        // $user = $users->find($id);
-        // $nomeUtente = $user['name'];
-        // $tags = $post['tags'];
-        // return view('admin.posts.show', compact('post', 'nomeUtente','tags'));
+    public function show(User $user){
+        // NON SERVE
     }
     
-    public function destroy(Post $post){
-        // $post->delete();
-        // return redirect()->route('admin.posts.index')->with('status','Articolo cancellato correttamente');
+    public function destroy(User $user){
+        $user->delete();
+        return redirect()->route('admin.users.index')->with('status','Utente cancellato correttamente');
     }
     
     public function edit(Post $post){
