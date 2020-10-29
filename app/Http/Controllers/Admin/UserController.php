@@ -69,28 +69,28 @@ class UserController extends Controller
     }
     
     public function edit(User $user){
-        // SOLO L'UTENTE STESSO PUO MODIFICARE IL SUO PROFILO - L'ADMIN PUO SOLO CREARE E ELIMINARE UTENTI
-        // $roles = Role::all();
-        // return view('admin.users.create', compact('user','roles'));
+        // ACCESSIBILE DAL MENU A TENDINA - SOLO L'UTENTE STESSO PUO MODIFICARE IL SUO PROFILO - L'ADMIN PUO SOLO CREARE E ELIMINARE UTENTI
+        $roles = Role::all();
+        return view('admin.users.create', compact('user','roles'));
     }
     
     public function update(Request $request, User $user){
-        // SOLO L'UTENTE STESSO PUO MODIFICARE IL SUO PROFILO - L'ADMIN PUO SOLO CREARE E ELIMINARE UTENTI
-        // $data = $request->all();
+        // CONSEGUENZA DI EDIT, ACCESSIBILE DAL MENU A TENDINA - SOLO L'UTENTE STESSO PUO MODIFICARE IL SUO PROFILO - L'ADMIN PUO SOLO CREARE E ELIMINARE UTENTI
+        $data = $request->all();
         
-        // $request->validate([
-        //     'name' => 'required',
-        //     'role_id' => 'required',
-        //     'email'=> [
-        //         'required',
-        //         Rule::unique('users')->ignore($user),
-        //     ],
-        //     'password'=> 'required'
-        // ]);
-        // $data['password'] = Hash::make($data['password']);
+        $request->validate([
+            'name' => 'required',
+            'role_id' => 'required',
+            'email'=> [
+                'required',
+                Rule::unique('users')->ignore($user),
+            ],
+            'password'=> 'required'
+        ]);
+        $data['password'] = Hash::make($data['password']);
         
-        // $user->update($data);
+        $user->update($data);
         
-        // return redirect()->route('admin.users.index')->with('status','Utente modificato correttamente');
+        return redirect()->route('admin.posts.index')->with('status','Utente modificato correttamente');
     }
 }

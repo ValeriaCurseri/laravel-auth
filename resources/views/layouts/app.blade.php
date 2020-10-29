@@ -56,6 +56,9 @@
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item" href="{{ route('admin.users.edit', Auth::id() ) }}">
+                                        {{ __('Modifica il tuo profilo') }}
+                                    </a>
                                     @if(Auth::user()->role->nome == 'admin')
                                     <a class="dropdown-item" href="{{ route('admin.users.index') }}">
                                         {{ __('Gestisci gli utenti') }}
